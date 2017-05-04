@@ -1,0 +1,9 @@
+<use name="ZCounting/DataFormats"/>
+<use name="ZCounting/DataFillers"/>
+<use name="ZCounting/Utils"/>
+<use name="TrackingTools/IPTools"/>
+<use name="FWCore/Framework"/>
+<flags CXXFLAGS="-g -Wall"/>
+<export>
+  <lib name="1"/>
+</export>

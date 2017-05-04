@@ -1,0 +1,6 @@
+<use name="boost"/>
+<use name="DataFormats/HLTReco"/>
+<flags CXXFLAGS="-g -Wall -lboost_system"/>
+<export>
+  <lib   name="1"/>
+</export>
