@@ -86,9 +86,9 @@ SelectZmm::SelectZmm(const edm::ParameterSet& iConfig):
   fFillerPV          (0),
   fFillerMuon        (0),
   fTrigger           (0),
-  fOutputName        (iConfig.getUntrackedParameter<std::string>("outputName", "ntuple.root")),
-  fOutputFile        (0),
-  fTotalEvents       (0),
+//  fOutputName        (iConfig.getUntrackedParameter<std::string>("outputName", "ntuple.root")),
+//  fOutputFile        (0),
+//  fTotalEvents       (0),
   fEventTree         (0),
   fEvtInfo           (0),
   fMuonArr           (0),
@@ -179,8 +179,8 @@ void SelectZmm::dqmBeginRun(edm::Run const &, edm::EventSetup const &)
   std::cout<<"SelectZmm::beginRun"<<std::endl;
 
   // Create output file, trees, and histograms
-  fOutputFile  = new TFile(fOutputName.c_str(), "RECREATE");
-  fTotalEvents = new TH1D("TotalEvents","TotalEvents",1,-10,10);
+  //fOutputFile  = new TFile(fOutputName.c_str(), "RECREATE");
+  //fTotalEvents = new TH1D("TotalEvents","TotalEvents",1,-10,10);
   fEventTree   = new TTree("Events","Events");
 
   fEventTree->Branch("Info",fEvtInfo);
@@ -257,7 +257,7 @@ void SelectZmm::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
 //  std::cout<<"SelectZmm::analyze"<<std::endl;
 //  std::cout<<iEvent.luminosityBlock()<<std::endl;
 
-  fTotalEvents->Fill(1);
+  //fTotalEvents->Fill(1);
 
   edm::Handle<edm::TriggerResults> hTrgRes;
   iEvent.getByToken(fHLTTag_token,hTrgRes);
@@ -319,10 +319,10 @@ void SelectZmm::endRun(edm::Run const& run, edm::EventSetup const& eSetup)
   edm::LogInfo("SelectZmm") <<  "SelectZmm::endRun" << std::endl;
   std::cout<<"SelectZmm::endRun"<<std::endl;
 
-  fOutputFile->cd();
-  fTotalEvents->Write();
-  fOutputFile->Write();
-  fOutputFile->Close();
+//  fOutputFile->cd();
+//  fTotalEvents->Write();
+//  fOutputFile->Write();
+//  fOutputFile->Close();
 
   std::string cmssw_base_src = getenv("CMSSW_BASE"); cmssw_base_src+="/src/";
   const baconhep::TTrigger triggerMenu(cmssw_base_src + fHLTFile);
@@ -333,9 +333,10 @@ void SelectZmm::endRun(edm::Run const& run, edm::EventSetup const& eSetup)
   TFile *infile=0;
   TTree *eventTree=0;
 
-  infile = TFile::Open(fOutputName.c_str());
-  assert(infile);
-  eventTree = (TTree*)infile->Get("Events"); assert(eventTree);
+//  infile = TFile::Open(fOutputName.c_str());
+//  assert(infile);
+//  eventTree = (TTree*)infile->Get("Events"); assert(eventTree);
+  eventTree = fEventTree;
   eventTree->SetBranchAddress("Info", &info);      TBranch *infoBr = eventTree->GetBranch("Info");
   eventTree->SetBranchAddress("Muon", &muonArr);   TBranch *muonBr = eventTree->GetBranch("Muon");
   eventTree->SetBranchAddress("PV",   &vertexArr); TBranch *vertexBr = eventTree->GetBranch("PV");

@@ -128,9 +128,9 @@ private:
   baconhep::TTrigger        *fTrigger;
 
   // Objects and arrays for output file
-  std::string              fOutputName;
-  TFile                   *fOutputFile;
-  TH1D                    *fTotalEvents;
+  //std::string              fOutputName;
+  //TFile                   *fOutputFile;
+  //TH1D                    *fTotalEvents;
   TTree                   *fEventTree;
   baconhep::TEventInfo    *fEvtInfo;
   TClonesArray            *fMuonArr;
